@@ -1,5 +1,5 @@
 import toml
-from CHANGE_ME import __version__
+from drft import __version__
 
 
 def test_version():

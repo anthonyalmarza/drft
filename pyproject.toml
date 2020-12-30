@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "CHANGE_ME"
+name = "drft"
 version = "0.0.0-alpha"
 description = ""
 authors = ["Anthony Almarza <anthony.almarza@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
-    { include = "CHANGE_ME", from = "src" },
+    { include = "drft", from = "src" },
 ]
 # https://pypi.org/classifiers/
 classifiers = [
@@ -21,6 +21,13 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
+Django = "^3.0"
+djangorestframework = "^3.11"
+django-filter = "^2.2.0"
+drf-yasg = { version = "^1.17", optional = true }
+
+[tool.poetry.extras]
+yasg = ["drf-yasg"]
 
 [tool.poetry.dev-dependencies]
 pytest = "^6"
@@ -38,6 +45,8 @@ codecov = "^2.1.11"
 coverage = {extras = ["toml"], version = "^5.3"}
 ipython = "^7.19.0"
 pre-commit = "^2.9.3"
+django-coverage-plugin = "^1.8.0"
+pytest-django = "^4.1.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -48,7 +57,7 @@ tests = "tests.run:main"
 
 [tool.coverage.run]
 source = [
-    "CHANGE_ME",
+    "drft",
 ]
 omit = [
     "tests/*",
@@ -62,7 +71,7 @@ omit = [
 ]
 skip_empty = true
 show_missing = true
-fail_under = 70
+#fail_under = 70
 
 [tool.black]
 line-length = 79
