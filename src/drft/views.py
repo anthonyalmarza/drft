@@ -123,14 +123,12 @@ class APIView(
 
     def filter_queryset(self, queryset):
         for backend in list(self.filter_backends):
-            queryset = backend().filter_queryset(
-                self.request, queryset, self
-            )
+            queryset = backend().filter_queryset(self.request, queryset, self)
         return queryset
 
     @property
     def paginator(self):
-        if not hasattr(self, '_paginator'):
+        if not hasattr(self, "_paginator"):
             if self.pagination_class is None:
                 self._paginator = None
             else:

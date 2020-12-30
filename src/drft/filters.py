@@ -118,10 +118,18 @@ class RelevanceSearchFilter(filters.SearchFilter):
         similarity_field = self.get_similarity_field(view)
         relevance_field = self.get_relevance_field(view)
         args = self.get_relevance_search_args(
-            phrase, similarity_field, relevance_field, threshold, view,
+            phrase,
+            similarity_field,
+            relevance_field,
+            threshold,
+            view,
         )
         kwargs = self.get_relevance_search_kwargs(
-            phrase, similarity_field, relevance_field, threshold, view,
+            phrase,
+            similarity_field,
+            relevance_field,
+            threshold,
+            view,
         )
         return queryset.filter(*args, **kwargs)
 

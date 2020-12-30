@@ -27,10 +27,16 @@ class SubqueryArray(Subquery):
 class TimestampedModel(models.Model):
 
     created = models.DateTimeField(
-        _("Created"), auto_now_add=True, editable=False, db_index=True,
+        _("Created"),
+        auto_now_add=True,
+        editable=False,
+        db_index=True,
     )
     modified = models.DateTimeField(
-        _("Modified"), auto_now=True, editable=False, db_index=True,
+        _("Modified"),
+        auto_now=True,
+        editable=False,
+        db_index=True,
     )
 
     class Meta:

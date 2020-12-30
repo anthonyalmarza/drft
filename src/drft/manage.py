@@ -9,6 +9,7 @@ def manage_factory(manage_py_path: str):
     :param manage_py_path: Path to the project's manage.py file.
     :return: callable
     """
+
     def _manage(command: str, *args):
         """
         :param command: Any valid django command e.g. migrate
@@ -17,4 +18,5 @@ def manage_factory(manage_py_path: str):
         """
         argv = [manage_py_path, command] + list(args)
         return execute_from_command_line(argv)
+
     return _manage
