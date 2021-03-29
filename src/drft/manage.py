@@ -10,8 +10,8 @@ def manage_factory(manage_py_path: Optional[str] = None):
         manage = manage_factory("my_project/manage.py")
         manage("migrate")
 
-        manage = manage_factory()  # value from MANGAGE_PY_PATH envvar
-        manage("mirgrate")
+        manage = manage_factory()  # value from MANAGE_PY_PATH envvar
+        manage("migrate")
     :param manage_py_path: Path to the project's manage.py file.
     :return: callable
     """

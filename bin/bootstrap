@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+echo -e "\nBootstrapping Python..."
+if ! hash pyenv &> /dev/null
+then
+  echo -e "\nInstalling PyEnv"
+  curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+fi
+
+# install the python version specified in .python-version or skip it if it's
+# already installed
+pyenv install -s
+
+if ! hash poetry &> /dev/null
+then
+  echo -e "\nInstalling Poetry"
+  curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+fi
+poetry install
+poetry run pre-commit install --hook-type commit-msg
+poetry run pre-commit install
+poetry run python manage.py migrate

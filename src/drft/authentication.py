@@ -18,7 +18,7 @@ def get_authorization_token(request, bearer="Bearer"):
     if len(auth) == 1:
         msg = _("Invalid Authorization header. No credentials provided.")
         raise AuthenticationFailed(msg, "missing_credentials")
-    elif len(auth) > 2:
+    if len(auth) > 2:
         msg = _(
             "Invalid Authorization header. Credentials string "
             "should not contain spaces."
