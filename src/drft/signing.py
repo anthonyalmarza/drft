@@ -56,7 +56,7 @@ class BadToken(Exception):
         :param message: str Error message
         :param token: str Token attempted to be parse
         """
-        super().__init__()
+        super().__init__(message)
         self.message = message
         self.token = token
 

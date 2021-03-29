@@ -46,7 +46,7 @@ poetry run pre-commit install
 ### Running Tests:
 
 ```shell
-poetry run tests
+tox
 ```
 
 
