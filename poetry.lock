@@ -338,7 +338,7 @@ doc = ["sphinx", "sphinx-rtd-theme", "sphinxcontrib-spelling"]
 
 [[package]]
 name = "faker"
-version = "6.6.3"
+version = "7.0.1"
 description = "Faker is a Python package that generates fake data for you."
 category = "dev"
 optional = false
@@ -615,7 +615,7 @@ pyparsing = ">=2.0.2"
 
 [[package]]
 name = "parso"
-version = "0.8.1"
+version = "0.8.2"
 description = "A Python Parser"
 category = "dev"
 optional = false
@@ -740,14 +740,14 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "pylint"
-version = "2.7.2"
+version = "2.7.4"
 description = "python code static checker"
 category = "dev"
 optional = false
 python-versions = "~=3.6"
 
 [package.dependencies]
-astroid = ">=2.5.1,<2.6"
+astroid = ">=2.5.2,<2.7"
 colorama = {version = "*", markers = "sys_platform == \"win32\""}
 isort = ">=4.2.5,<6"
 mccabe = ">=0.6,<0.7"
@@ -985,7 +985,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)", "win-inet-pton"]
 
 [[package]]
 name = "responses"
-version = "0.13.1"
+version = "0.13.2"
 description = "A utility library for mocking out the `requests` Python library."
 category = "dev"
 optional = false
@@ -1001,11 +1001,11 @@ tests = ["coverage (>=3.7.1,<6.0.0)", "pytest-cov", "pytest-localserver", "flake
 
 [[package]]
 name = "ruamel.yaml"
-version = "0.17.0"
+version = "0.17.2"
 description = "ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"
 category = "main"
 optional = true
-python-versions = "*"
+python-versions = ">=3"
 
 [package.dependencies]
 "ruamel.yaml.clib" = {version = ">=0.1.2", markers = "platform_python_implementation == \"CPython\" and python_version < \"3.10\""}
@@ -1545,8 +1545,8 @@ factory-boy = [
     {file = "factory_boy-3.2.0.tar.gz", hash = "sha256:401cc00ff339a022f84d64a4339503d1689e8263a4478d876e58a3295b155c5b"},
 ]
 faker = [
-    {file = "Faker-6.6.3-py3-none-any.whl", hash = "sha256:579348fac4597cf5c998f10e3b840b48d85157413cb501809f98a83eb228e907"},
-    {file = "Faker-6.6.3.tar.gz", hash = "sha256:c2852cadc99a4ebdbf06934e4c15e30f2307d414ead21d15605759602645f152"},
+    {file = "Faker-7.0.1-py3-none-any.whl", hash = "sha256:08c4cfbfd498c0e90aff6741771c01803d894013df858db6a573182c6a47951f"},
+    {file = "Faker-7.0.1.tar.gz", hash = "sha256:20c6e4253b73ef2a783d38e085e7c8d8916295fff31c7403116d2af8f908f7ca"},
 ]
 filelock = [
     {file = "filelock-3.0.12-py3-none-any.whl", hash = "sha256:929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"},
@@ -1707,8 +1707,8 @@ packaging = [
     {file = "packaging-20.9.tar.gz", hash = "sha256:5b327ac1320dc863dca72f4514ecc086f31186744b84a230374cc1fd776feae5"},
 ]
 parso = [
-    {file = "parso-0.8.1-py2.py3-none-any.whl", hash = "sha256:15b00182f472319383252c18d5913b69269590616c947747bc50bf4ac768f410"},
-    {file = "parso-0.8.1.tar.gz", hash = "sha256:8519430ad07087d4c997fda3a7918f7cfa27cb58972a8c89c2a0295a1c940e9e"},
+    {file = "parso-0.8.2-py2.py3-none-any.whl", hash = "sha256:a8c4922db71e4fdb90e0d0bc6e50f9b273d3397925e5e60a717e719201778d22"},
+    {file = "parso-0.8.2.tar.gz", hash = "sha256:12b83492c6239ce32ff5eed6d3639d6a536170723c6f3f1506869f1ace413398"},
 ]
 pathspec = [
     {file = "pathspec-0.8.1-py2.py3-none-any.whl", hash = "sha256:aa0cb481c4041bf52ffa7b0d8fa6cd3e88a2ca4879c533c9153882ee2556790d"},
@@ -1759,8 +1759,8 @@ pygments = [
     {file = "Pygments-2.8.1.tar.gz", hash = "sha256:2656e1a6edcdabf4275f9a3640db59fd5de107d88e8663c5d4e9a0fa62f77f94"},
 ]
 pylint = [
-    {file = "pylint-2.7.2-py3-none-any.whl", hash = "sha256:d09b0b07ba06bcdff463958f53f23df25e740ecd81895f7d2699ec04bbd8dc3b"},
-    {file = "pylint-2.7.2.tar.gz", hash = "sha256:0e21d3b80b96740909d77206d741aa3ce0b06b41be375d92e1f3244a274c1f8a"},
+    {file = "pylint-2.7.4-py3-none-any.whl", hash = "sha256:209d712ec870a0182df034ae19f347e725c1e615b2269519ab58a35b3fcbbe7a"},
+    {file = "pylint-2.7.4.tar.gz", hash = "sha256:bd38914c7731cdc518634a8d3c5585951302b6e2b6de60fbb3f7a0220e21eeee"},
 ]
 pylint-django = [
     {file = "pylint-django-2.4.2.tar.gz", hash = "sha256:f8d77f7da47a7019cda5cb669c214f03033208f9e945094661299d2637c0da06"},
@@ -1900,12 +1900,12 @@ requests = [
     {file = "requests-2.25.1.tar.gz", hash = "sha256:27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804"},
 ]
 responses = [
-    {file = "responses-0.13.1-py2.py3-none-any.whl", hash = "sha256:3b1ea9cf026edaaf25e853abc4d3b2687d25467e9d8d41e77ee525cad0673f3e"},
-    {file = "responses-0.13.1.tar.gz", hash = "sha256:cf62ab0f4119b81d485521b2c950d8aa55a885c90126488450b7acb8ee3f77ac"},
+    {file = "responses-0.13.2-py2.py3-none-any.whl", hash = "sha256:75529f9bea08276cea43545dcb6129f137c299d6a12269485a753785c869e0e2"},
+    {file = "responses-0.13.2.tar.gz", hash = "sha256:0f0ab4717728d33dae8e66deea61eecc1e38f0398e35249e3963ff74cfc8d0d8"},
 ]
 "ruamel.yaml" = [
-    {file = "ruamel.yaml-0.17.0-py2.py3-none-any.whl", hash = "sha256:3a41b30235cc6ff7baee0321ffa99e7f94bbc7c7e0f2cac1d75b6b24fc24f202"},
-    {file = "ruamel.yaml-0.17.0.tar.gz", hash = "sha256:3572505e63dd35b5dea62cd0386d03c4f2a53da29a3af09f428114cc85c564aa"},
+    {file = "ruamel.yaml-0.17.2-py3-none-any.whl", hash = "sha256:0850def9ebca23b3a8c64c4b4115ebb6b364a10d49f89d289a26ee965e1e7d9d"},
+    {file = "ruamel.yaml-0.17.2.tar.gz", hash = "sha256:8f1e15421668b9edf30ed02899f5f81aff9808a4271935776f61a99a569a13da"},
 ]
 "ruamel.yaml.clib" = [
     {file = "ruamel.yaml.clib-0.2.2-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:28116f204103cb3a108dfd37668f20abe6e3cafd0d3fd40dba126c732457b3cc"},

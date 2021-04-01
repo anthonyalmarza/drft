@@ -2,9 +2,10 @@ from django.utils.encoding import smart_text
 from django.utils.translation import gettext_lazy as _
 from rest_framework.authentication import get_authorization_header
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.request import Request
 
 
-def get_authorization_token(request, bearer="Bearer"):
+def get_authorization_token(request: Request, bearer: str = "Bearer"):
     """Parse a request for the JWT token.
 
     :param request:

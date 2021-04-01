@@ -86,6 +86,7 @@ show_missing = true
 line-length = 79
 
 [tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
 addopts = "-s --cov=src/drft --no-cov-on-fail"
 python_files = [
     "test_*.py",
