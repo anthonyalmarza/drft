@@ -34,7 +34,7 @@ ipython = "^7.19.0"
 pre-commit = "^2.9.3"
 black = "^20.8b1"
 flake8 = "^3.8.4"
-mypy = "^0.790"
+mypy = "^0.812"
 pylint = "^2.7.2"
 pylint-django = "^2.4.2"
 pyproject-script = "^0.0.0-alpha.1"
@@ -59,6 +59,7 @@ sphinx-pyreverse = "^0.0.14"
 sphinx-autodoc-typehints = "^1.11.1"
 sphinx-autobuild = "^2021.3.14"
 recommonmark = "^0.7.1"
+isort = "^5.8.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -84,6 +85,10 @@ show_missing = true
 
 [tool.black]
 line-length = 79
+
+[tool.isort]
+profile = "black"
+line_length = 79
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "tests.settings"

@@ -1,16 +1,17 @@
-from typing import Type, Optional, List, Any
+from typing import Any, List, Optional, Type
 
 from django.db.models import QuerySet
 from rest_framework import (
-    mixins,
-    viewsets,
-    views,
-    response,
     decorators,
+    mixins,
+    response,
     serializers,
     status,
+    views,
+    viewsets,
 )
 from rest_framework.settings import api_settings as drf_settings
+
 from drft.filters import FilterSet
 
 

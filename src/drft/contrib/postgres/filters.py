@@ -1,24 +1,25 @@
 # pylint: disable=no-self-use,too-many-ancestors,no-member
 # pylint: disable=unused-argument,too-many-arguments
 from typing import Optional, Tuple
+
 from django.contrib.postgres.search import (
-    SearchRank,
     SearchQuery,
-    TrigramSimilarity,
+    SearchRank,
     SearchVector,
+    TrigramSimilarity,
 )
-from django.db.models import Q, QuerySet, Func
+from django.db.models import Func, Q, QuerySet
 from django.utils.translation import gettext as _
-from rest_framework import filters, exceptions
+from rest_framework import exceptions, filters
 from rest_framework.request import Request
 from rest_framework.settings import api_settings
 
-from drft.filters import OrderingFilter
+from drft.filters import OrderingFilterBackend
 
 
 # NOTE: It may be important that the RelevanceSearchFilter is listed before
-# the RelevanceOrderingFilter.
-class RelevanceOrderingFilter(OrderingFilter):
+# the RelevanceOrderingFilterBackend.
+class RelevanceOrderingFilterBackend(OrderingFilterBackend):
     """
     An ordering filter backend that strictly enforces that the search parameter
     was passed in the query params when the relevance field is being sorted on.

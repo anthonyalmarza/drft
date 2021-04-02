@@ -1,8 +1,7 @@
 import pytest
-
-from drft.authentication import get_authorization_token, AuthenticationFailed
 from rest_framework.test import APIRequestFactory
 
+from drft.authentication import AuthenticationFailed, get_authorization_token
 
 pytestmark = [pytest.mark.django_db]
 

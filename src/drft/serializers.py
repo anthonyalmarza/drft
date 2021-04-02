@@ -1,8 +1,8 @@
-from typing import Optional, Any
+from typing import Any, Optional
+
 from django.core.validators import RegexValidator
 from django.utils.translation import gettext as _
 from rest_framework import serializers
-
 
 ALIAS_MIN_LENGTH = 3
 ALIAS_MAX_LENGTH = 32

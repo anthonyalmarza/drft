@@ -5,15 +5,52 @@ drft.filters
 The `filters` module is designed to extend the functionality made available via
 both DRF filters and the `django-filter` projects.
 """
-from django.db.models import F
+from django.db.models import F, QuerySet
 from django_filters import filters as dj_filters
 from django_filters.constants import EMPTY_VALUES
-from django_filters.rest_framework import (  # noqa pylint: disable=unused-import
-    DjangoFilterBackend as FilterBackend,
-    FilterSet,
-)
+from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import FilterSet as DjangoFilterSet
 from django_filters.rest_framework.filters import *  # noqa
 from rest_framework import filters
+
+
+class FilterBackend(DjangoFilterBackend):
+    """
+    Usage:
+        class UserViewSet(ModelViewSet):
+            filter_backends = [
+                FilterBackend,
+                ...
+            ]
+    """
+
+
+class FilterSet(DjangoFilterSet):
+    """
+    Usage:
+        class UsersFilterSet(FilterSet):
+            class Meta:
+                model = User
+                fields = ["created", "username"]
+
+        class UsersViewSet(ModelViewSet):
+            filterset_class = UserFilterSet
+            ...
+    """
+
+    def filter_queryset(self, queryset) -> QuerySet:
+        """
+        Filter the queryset with the underlying form's `cleaned_data`. You must
+        call `is_valid()` or `errors` before calling this method.
+
+        This method should be overridden if additional filtering needs to be
+        applied to the queryset before it is cached.
+        """
+        # NOTE: We extend the class here from django_filter because the
+        # assert statement is unnecessary.
+        for name, value in self.form.cleaned_data.items():
+            queryset = self.filters[name].filter(queryset, value)
+        return queryset
 
 
 def _get_field_names(field: str, aliases: dict):
@@ -28,19 +65,19 @@ def _get_field_names(field: str, aliases: dict):
     return alias.split(",")
 
 
-class OrderingFilter(
+class OrderingFilterBackend(
     filters.OrderingFilter
 ):  # pylint: disable=function-redefined
     """
-    OrderingFilter extends rest_framework.filters.OrderingFilter to provide a
-    configurable `ordering_aliases` class attribute as well as by default
-    sorting nulls last.
+    OrderingFilterBackend extends rest_framework.filters.OrderingFilter to
+    provide a configurable `ordering_aliases` class attribute as well as by
+    default sorting nulls last.
 
     Usage:
         # in settings.py
         REST_FRAMEWORK = {
             "DEFAULT_FILTER_BACKENDS": [
-                "drft.filters.OrderingFilter"
+                "drft.filters.OrderingFilterBackend"
             ]
         }
 
@@ -105,7 +142,8 @@ class OrderingFilter(
         return F(trimmed).asc(nulls_last=self.NULLS_LAST)
 
 
-def patched_call(filter_method, qs, value):  # pylint: disable=invalid-name
+# pylint: disable=invalid-name
+def patched_filter_method_call(filter_method, qs, value):
     """Patch the FilterMethod.__call__ method.
 
     Provides access to the request in filter field method callable.
@@ -124,4 +162,4 @@ def patched_call(filter_method, qs, value):  # pylint: disable=invalid-name
     )
 
 
-dj_filters.FilterMethod.__call__ = patched_call
+dj_filters.FilterMethod.__call__ = patched_filter_method_call

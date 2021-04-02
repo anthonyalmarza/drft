@@ -1,4 +1,4 @@
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 from django.utils.translation import gettext_lazy as _
 from rest_framework.authentication import get_authorization_header
 from rest_framework.exceptions import AuthenticationFailed
@@ -13,7 +13,7 @@ def get_authorization_token(request: Request, bearer: str = "Bearer"):
     :return None|str: None if the request should pass through or the token str
     """
     auth = get_authorization_header(request).split()
-    if not auth or smart_text(auth[0].lower()) != bearer.lower():
+    if not auth or smart_str(auth[0].lower()) != bearer.lower():
         return None
 
     if len(auth) == 1:

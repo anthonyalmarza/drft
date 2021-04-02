@@ -1,6 +1,8 @@
-import pytest
 from datetime import timedelta
-from drft.signing import Signer, BadToken
+
+import pytest
+
+from drft.signing import BadToken, Signer
 
 
 @pytest.fixture()

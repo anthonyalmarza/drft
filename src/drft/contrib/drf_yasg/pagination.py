@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from typing import List, Any, Optional
+from typing import Any, List, Optional
 
 try:
     from drf_yasg import openapi

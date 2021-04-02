@@ -6,8 +6,7 @@ import time
 from datetime import timedelta
 from typing import Callable, Optional, Union
 
-from .secrets import salted_hmac, compare_digest
-
+from .secrets import compare_digest, salted_hmac
 
 _UNSAFE_SEP = re.compile(r"^[A-z0-9-_=]*$")
 
