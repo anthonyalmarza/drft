@@ -42,14 +42,7 @@ jobs:
       #              run test suite
       #----------------------------------------------
       - name: Run Tests
-        run: poetry run coverage run -m pytest
-      - name: Generate Reports
-        run: poetry run coverage report
-      #----------------------------------------------
-      #             upload coverage stats
-      #----------------------------------------------
-      - name: Upload coverage
-        run: poetry run codecov
+        run: poetry run pytest && codecov
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   lint:
