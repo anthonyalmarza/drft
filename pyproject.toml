@@ -101,3 +101,7 @@ python_files = [
 testpaths = [
     "./tests",
 ]
+markers = [
+    "unit",
+    "integration",
+]

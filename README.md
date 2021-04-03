@@ -30,7 +30,7 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 ```
 More instructions [here][poetry-installation]
 
-### Install the dependencies:
+### Installing dependencies
 
 ```shell
 poetry install
@@ -43,10 +43,46 @@ poetry run pre-commit install --hook-type commit-msg
 poetry run pre-commit install
 ```
 
-### Running Tests:
+### Running Tests
+For running tests this project uses both [pytest][pytest] and [tox][tox].
 
 ```shell
 tox
+```
+
+### Adding Tests
+
+All tests are housed in the [tests](tests/README.md) package. Two markers are
+made available to explicitly distinguish between unit and integration tests.
+
+```python
+# in test_some_util.py
+import pytest
+
+
+@pytest.mark.unit
+class TestSomeUtil:
+    def test_basic_signature(self):
+        ...
+
+
+@pytest.mark.integration
+class TestSomeUtilInApp:
+    def test_app_workflow(self):
+        ...
+```
+More information on pytest's markers can be found [here][pytest-markers].
+
+To run just the unit tests:
+
+```shell
+pytest -m unit
+```
+
+To run everything but the unit tests:
+
+```shell
+pytest -m "not unit"
 ```
 
 
@@ -61,3 +97,8 @@ tox
 
 [pyenv]: https://github.com/pyenv/pyenv
 [pyenv-installer]: https://github.com/pyenv/pyenv-installer
+
+[tox]: https://tox.readthedocs.io/en/latest/index.html
+
+[pytest]: https://docs.pytest.org/en/stable/
+[pytest-markers]: https://docs.pytest.org/en/stable/example/markers.html

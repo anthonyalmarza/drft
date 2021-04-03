@@ -39,57 +39,61 @@ def view(mocker):
     return view
 
 
-def test_patched_filter_method_call(mocker, view):
-    trace = mocker.Mock()
-    backend = FilterBackend()
-    req = Request(APIRequestFactory().get("/test/?cost=1"))
-    queryset = backend.filter_queryset(request=req, queryset=trace, view=view)
-    assert queryset == trace.all().filter(**{"cost": 1})
+@pytest.mark.unit
+class TestFilterBackend:
+    def test_patched_filter_method_call(self, mocker, view):
+        trace = mocker.Mock()
+        backend = FilterBackend()
+        req = Request(APIRequestFactory().get("/test/?cost=1"))
+        queryset = backend.filter_queryset(
+            request=req, queryset=trace, view=view
+        )
+        assert queryset == trace.all().filter(**{"cost": 1})
+
+    def test_patched_filter_method_call_with_pass_through(self, mocker, view):
+        trace = mocker.Mock()
+        backend = FilterBackend()
+        req = Request(APIRequestFactory().get("/test/?cost="))
+        queryset = backend.filter_queryset(
+            request=req, queryset=trace, view=view
+        )
+        assert queryset == trace.all()
 
 
-def test_patched_filter_method_call_with_pass_through(mocker, view):
-    trace = mocker.Mock()
-    backend = FilterBackend()
-    req = Request(APIRequestFactory().get("/test/?cost="))
-    queryset = backend.filter_queryset(request=req, queryset=trace, view=view)
-    assert queryset == trace.all()
+@pytest.mark.unit
+class TestOrderingFilterBackend:
+    def test_ordering_aliases(self, mocker, view):
+        queryset = mocker.Mock()
+        backend = OrderingFilterBackend()
 
+        req = Request(APIRequestFactory().get("/test/?sort=publisher-est"))
+        ordering = backend.get_ordering(req, queryset, view)
+        assert ordering == [F("publisher__established").asc(nulls_last=True)]
 
-def test_ordering_aliases(mocker, view):
-    queryset = mocker.Mock()
-    backend = OrderingFilterBackend()
+    def test_ordering_aliases_with_pass_through_sort_value(self, mocker, view):
+        queryset = mocker.Mock()
+        backend = OrderingFilterBackend()
+        req = Request(APIRequestFactory().get("/test/?sort=created"))
+        ordering = backend.get_ordering(req, queryset, view)
+        assert ordering == [F("created").asc(nulls_last=True)]
 
-    req = Request(APIRequestFactory().get("/test/?sort=publisher-est"))
-    ordering = backend.get_ordering(req, queryset, view)
-    assert ordering == [F("publisher__established").asc(nulls_last=True)]
+    def test_ordering_aliases_with_list_aliases(self, mocker, view):
+        queryset = mocker.Mock()
+        backend = OrderingFilterBackend()
+        view.ordering_aliases = [
+            ("publisher-est", "publisher__established"),
+            ("recent", "published,-created"),
+        ]
+        req = Request(APIRequestFactory().get("/test/?sort=-recent"))
+        ordering = backend.get_ordering(req, queryset, view)
+        assert ordering == [
+            F("published").desc(nulls_last=True),
+            F("created").asc(nulls_last=True),
+        ]
 
-
-def test_ordering_aliases_with_pass_through_sort_value(mocker, view):
-    queryset = mocker.Mock()
-    backend = OrderingFilterBackend()
-    req = Request(APIRequestFactory().get("/test/?sort=created"))
-    ordering = backend.get_ordering(req, queryset, view)
-    assert ordering == [F("created").asc(nulls_last=True)]
-
-
-def test_ordering_aliases_with_list_aliases(mocker, view):
-    queryset = mocker.Mock()
-    backend = OrderingFilterBackend()
-    view.ordering_aliases = [
-        ("publisher-est", "publisher__established"),
-        ("recent", "published,-created"),
-    ]
-    req = Request(APIRequestFactory().get("/test/?sort=-recent"))
-    ordering = backend.get_ordering(req, queryset, view)
-    assert ordering == [
-        F("published").desc(nulls_last=True),
-        F("created").asc(nulls_last=True),
-    ]
-
-
-def test_ordering_aliases_with_no_ordering_parameter(mocker, view):
-    queryset = mocker.Mock()
-    backend = OrderingFilterBackend()
-    req = Request(APIRequestFactory().get("/test/"))
-    ordering = backend.get_ordering(req, queryset, view)
-    assert ordering is None
+    def test_ordering_aliases_with_no_ordering_parameter(self, mocker, view):
+        queryset = mocker.Mock()
+        backend = OrderingFilterBackend()
+        req = Request(APIRequestFactory().get("/test/"))
+        ordering = backend.get_ordering(req, queryset, view)
+        assert ordering is None
